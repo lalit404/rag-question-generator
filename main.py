@@ -2,7 +2,7 @@ import os
 from groq import Groq
 from src.question_generator import generate_questions
 from src.embedder import embed_chunks
-from src.pdf_extractor import extract_text
+from src.document_text_extractor import extract_text
 from src.chunker import chunk_text
 from src.vector_store import init_collection, store_embeddings
 from sentence_transformers import SentenceTransformer

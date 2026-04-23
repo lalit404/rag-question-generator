@@ -2,3 +2,4 @@ pymupdf
 sentence-transformers
 chromadb
 groq
+docling
