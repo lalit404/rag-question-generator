@@ -11,12 +11,13 @@ def init_collection():
 # A client — the connection to the database engine. Like mysql.connector.connect() in MySQL.
 # A collection — the table where your data lives.
     
-def store_embeddings(collection, chunks, embeddings):
+def store_embeddings(collection, chunks, embeddings,metadatas):
     ids=[f"chunks_{i}" for i in range(len(chunks))]
     collection.add(
         documents=chunks,                 #model.encode(chunks) returns numpy array
         embeddings=embeddings.tolist(),  #model.encode(chunks).tolist() returns plain Python list
-        ids=ids                                    
+        ids=ids,
+        metadatas=metadatas                                    
     )
     
 # Function 2 — store_embeddings()

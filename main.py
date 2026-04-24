@@ -12,15 +12,22 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 groq_api_key = os.getenv("GROQ_API_KEY")
 pdf_path = r"data/merged_science_chapters.pdf"
 
+book_name = input("Enter book name: ")
+author = input("Enter author name: ")
+
 full_pdf_text = extract_text(pdf_path)
 
-chunks = hierarchical_chunk(full_pdf_text)
+chunks,metadatas = hierarchical_chunk(full_pdf_text)
+
+for meta in metadatas:
+    meta["book_name"]=book_name
+    meta["author"]=author
 
 embeddings = embed_chunks(chunks,model)
 
 collection = init_collection()
 
-store_embeddings(collection, chunks, embeddings)
+store_embeddings(collection, chunks, embeddings,metadatas)
 
 client = Groq(api_key=groq_api_key)
 
