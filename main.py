@@ -27,3 +27,20 @@ async def generate(topic: str = Form(...), n_questions: int = Form(10)):
         return {"questions": questions}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+@app.post("/extract-mcqs")
+async def extract_mcqs_endpoint(
+    file: UploadFile = File(...),
+):
+    try:
+        file_path = f"data/{file.filename}"
+        with open(file_path, "wb") as f:
+            shutil.copyfileobj(file.file, f)
+        
+        from src.mcq_extractor import extract_mcqs
+        from src.pipeline import client
+        
+        mcqs = extract_mcqs(file_path, client)
+        return {"mcqs": mcqs, "total": len(mcqs)}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
