@@ -1,5 +1,5 @@
 import json
-
+import time
 from src.chunker import hierarchical_chunk
 from src.document_text_extractor import extract_text
 
@@ -61,5 +61,6 @@ def extract_mcqs(file_path, client):
             all_mcqs.extend(valid_mcqs)
         except:
             pass
+        time.sleep(1)
             
     return all_mcqs
