@@ -10,7 +10,7 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 groq_api_key = os.getenv("GROQ_API_KEY")
-pdf_path = r"data/merged_science_chapters.pdf"
+pdf_path = r"data/jesc106.pdf"
 
 book_name = input("Enter book name: ")
 author = input("Enter author name: ")
